@@ -1982,7 +1982,7 @@ class CertificateGen(object):
 
         return (download_uuid, verify_uuid, download_url)
 
-    def _generate_bdu_dynamic_certificate(
+    def _generate_bdu_certificate(
         self,
         student_name,
         download_dir,
@@ -2047,7 +2047,7 @@ class CertificateGen(object):
         MAX_FULL_WIDTH = WIDTH * .72  # Width to which to constrian full page text blocks
         GUTTER_WIDTH = 120  # Space from the left and right sides (in points)
         GUTTER_WIDTH = 120  # Space from the right side for Date (in points)
-        DATE_INDENT_BOTTOM = 112  # Space from bottom for Date (in points)
+        DATE_INDENT_BOTTOM = 120  # Space from bottom for Date (in points)
         STANDARD_GRAY = colors.Color(0.13, 0.14, 0.22)  # Main dark gray text color
         CARDINAL_RED = colors.Color(.55, .08, .08)  # Special red color for course title
 
@@ -2137,7 +2137,7 @@ class CertificateGen(object):
 
         # positioning paragraph wrapping box from its bottom left corner
         # calculating positioning for top right corner of page
-        paragraph.drawOn(PAGE, (WIDTH/2 - max_width/2), (HEIGHT - DATE_INDENT_TOP))
+        paragraph.drawOn(PAGE, (WIDTH/2 - max_width/2), DATE_INDENT_BOTTOM)
 
         # SECTION: Student name
         student_name_string = u"<b>{0}</b>".format(student_name.decode('utf-8'))
@@ -2147,7 +2147,7 @@ class CertificateGen(object):
         max_leading = maxFontSize * 1.2
         max_height = maxFontSize * 1.2
         max_width = MAX_FULL_WIDTH
-        minYOffset = 415     # distance from bottom of page (in points)
+        minYOffset = 300     # distance from bottom of page (in points)
 
         paragraph = autoscale_text(
             PAGE,
@@ -2189,7 +2189,7 @@ class CertificateGen(object):
         max_leading = maxFontSize * 1.1
         max_height = maxFontSize * 2.1
         max_width = MAX_GEN_WIDTH
-        minYOffset = 305     # distance from bottom of page (in points)
+        minYOffset = 200     # distance from bottom of page (in points)
 
         paragraph = autoscale_text(PAGE, course_title, maxFontSize, max_leading, max_height, max_width, course_style)
         width, height = paragraph.wrapOn(PAGE, max_width, max_height)
@@ -2213,7 +2213,7 @@ class CertificateGen(object):
 
             (fonttag, fontfile, honor_style) = font_for_string(
                 fontlist_with_style(style_small_text),
-                achievements_paragraph,
+                paragraph_string,
             )
 
             max_height = 10
