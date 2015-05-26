@@ -2047,7 +2047,7 @@ class CertificateGen(object):
         MAX_FULL_WIDTH = WIDTH * .72  # Width to which to constrian full page text blocks
         GUTTER_WIDTH = 120  # Space from the left and right sides (in points)
         GUTTER_WIDTH = 120  # Space from the right side for Date (in points)
-        DATE_INDENT_BOTTOM = 120  # Space from bottom for Date (in points)
+        DATE_INDENT_BOTTOM = 100  # Space from bottom for Date (in points)
         STANDARD_GRAY = colors.Color(0.13, 0.14, 0.22)  # Main dark gray text color
         CARDINAL_RED = colors.Color(.55, .08, .08)  # Special red color for course title
 
@@ -2090,7 +2090,7 @@ class CertificateGen(object):
             name="big-course-text",
             fontSize=30,
             leading=36,
-            textColor=CARDINAL_RED,
+            textColor=STANDARD_GRAY,
             alignment=TA_CENTER,
         )
         style_small_text = ParagraphStyle(
@@ -2140,14 +2140,14 @@ class CertificateGen(object):
         paragraph.drawOn(PAGE, (WIDTH/2 - max_width/2), DATE_INDENT_BOTTOM)
 
         # SECTION: Student name
-        student_name_string = u"<b>{0}</b>".format(student_name.decode('utf-8'))
+        student_name_string = u"{0}".format(student_name.decode('utf-8'))
         (fonttag, fontfile, name_style) = font_for_string(fontlist_with_style(style_big_name_text), student_name_string)
 
         maxFontSize = 30      # good default name text size (in points)
         max_leading = maxFontSize * 1.2
         max_height = maxFontSize * 1.2
         max_width = MAX_FULL_WIDTH
-        minYOffset = 300     # distance from bottom of page (in points)
+        minYOffset = 290     # distance from bottom of page (in points)
 
         paragraph = autoscale_text(
             PAGE,
@@ -2181,7 +2181,7 @@ class CertificateGen(object):
 
         # SECTION: Course Title
         course_name_string = self.long_course.decode('utf-8')
-        course_title = u"<b>{0}</b>".format(course_name_string)
+        course_title = u"{0}".format(course_name_string)
 
         (fonttag, fontfile, course_style) = font_for_string(fontlist_with_style(style_big_course_text), course_title)
 
@@ -2221,7 +2221,7 @@ class CertificateGen(object):
 
             paragraph = Paragraph(paragraph_string, honor_style)
             paragraph.wrapOn(PAGE, max_width, max_height)
-            paragraph.drawOn(PAGE, GUTTER_WIDTH, 70)
+            paragraph.drawOn(PAGE, 10, 30)
 
         # Render Page
         PAGE.showPage()
