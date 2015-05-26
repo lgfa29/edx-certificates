@@ -2147,7 +2147,7 @@ class CertificateGen(object):
         max_leading = maxFontSize * 1.2
         max_height = maxFontSize * 1.2
         max_width = MAX_FULL_WIDTH
-        minYOffset = 290     # distance from bottom of page (in points)
+        minYOffset = 320     # distance from bottom of page (in points)
 
         paragraph = autoscale_text(
             PAGE,
@@ -2221,7 +2221,7 @@ class CertificateGen(object):
 
             paragraph = Paragraph(paragraph_string, honor_style)
             paragraph.wrapOn(PAGE, max_width, max_height)
-            paragraph.drawOn(PAGE, 10, 30)
+            paragraph.drawOn(PAGE, 20, 35)
 
         # Render Page
         PAGE.showPage()
